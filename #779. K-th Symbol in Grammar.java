@@ -1,0 +1,19 @@
+class Solution {
+    public int kthGrammar(int n, int k) {
+        
+        if(n==1)
+            return 0;
+        
+        if(k%2==0)
+        {
+            return reverse(kthGrammar(n-1 , k/2));  //even case
+        }
+        else
+            return kthGrammar(n-1  , (k+1)/2);   //odd case
+    }
+    
+    public int reverse(int value)
+    {
+        return value==0?1:0;
+    }
+}
