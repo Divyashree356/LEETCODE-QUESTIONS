@@ -40,3 +40,42 @@ public:
         return merged;
     }
 };
+
+
+//using stack JAVA
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        Arrays.sort(intervals, (a,b)->{
+           return a[0]-b[0]; 
+        });
+        Stack<int []> st= new Stack<>();
+        st.push(intervals[0]);
+        
+        for(int i=1;i<intervals.length;i++)
+        {
+         int[] t= st.pop();
+         int e= Math.max(t[1] , intervals[i][1]);
+             if(t[1]>=intervals[i][0])
+            {
+            st.push(new int[]{t[0], e});
+         }
+            else
+         {
+                st.push(t);
+               st.push(intervals[i]);
+         }
+              
+      }
+      int[][] ans= new int[st.size()][2];
+        
+        for(int i=ans.length-1;i>=0;i--)
+        {
+            int[] temp= st.pop();
+            ans[i][0]=temp[0];
+            ans[i][1]=temp[1];
+        }    
+        return ans;
+        
+    }
+}
